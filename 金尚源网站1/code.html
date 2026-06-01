@@ -1,0 +1,908 @@
+<!DOCTYPE html><html class="light" lang="zh-CN" style=""><head></head><body class="bg-surface text-on-surface font-body-main max-w-md mx-auto relative antialiased md:hidden">
+<!-- Loading Screen -->
+<div id="loading-screen" style="position: fixed; inset: 0; background: #ffffff; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <img src="https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/ccv2%2F2026-05-31%2FMiniMax-M2.7%2F2038809540916417323%2Fd7b81163df6cea579e40f0e4dc331196f85880c95768014cc07c2f28c4e6d2fc..jpeg?Expires=1780311204&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=Sq7YDc4Vw2aSRNLmN2X97IGc8sY%3D" alt="金尚源" style="height: 32px; object-contain; margin-bottom: 16px; opacity: 0; transform: translateY(10px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);" id="loading-logo">
+        <p style="font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.15em; color: #1c1b1b; font-weight: 300; opacity: 0; transform: translateY(10px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);" id="loading-title">金尚源</p>
+        <p style="font-family: 'Hanken Grotesk', sans-serif; font-size: 8px; letter-spacing: 0.4em; color: #747878; margin-top: 4px; opacity: 0; transition: opacity 0.6s ease 0.4s;" id="loading-subtitle">JINSHANGYUAN</p>
+    </div>
+    <div style="width: 100px; height: 1px; background: #e5e2e1; margin-top: 32px; position: relative; overflow: hidden;">
+        <div id="loading-bar" style="position: absolute; left: 0; top: 0; height: 100%; width: 0; background: #1c1b1b; transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);"></div>
+    </div>
+</div>
+
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ARTISAN WOODWORK</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#868382",
+                    "primary-container": "#1c1b1b",
+                    "inverse-on-surface": "#f4f0ef",
+                    "secondary-fixed-dim": "#e0c29f",
+                    "surface-container-highest": "#e5e2e1",
+                    "tertiary-fixed-dim": "#cac6c4",
+                    "on-error-container": "#93000a",
+                    "off-white": "#F9F8F6",
+                    "inverse-surface": "#313030",
+                    "surface-bright": "#fdf8f8",
+                    "on-tertiary-fixed-variant": "#484645",
+                    "warm-gray": "#E5E2DD",
+                    "primary-fixed": "#e5e2e1",
+                    "outline-variant": "#c4c7c7",
+                    "on-primary-fixed-variant": "#474746",
+                    "surface-container-high": "#ebe7e6",
+                    "on-primary-fixed": "#1c1b1b",
+                    "secondary": "#715a3e",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#000000",
+                    "secondary-container": "#fdddb9",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#1c1b1a",
+                    "surface": "#fdf8f8",
+                    "inverse-primary": "#c8c6c5",
+                    "surface-container-low": "#f7f3f2",
+                    "surface-dim": "#ddd9d8",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#786044",
+                    "secondary-fixed": "#fdddb9",
+                    "surface-variant": "#e5e2e1",
+                    "surface-container": "#f1edec",
+                    "error": "#ba1a1a",
+                    "deep-taupe": "#4A4540",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#281803",
+                    "surface-tint": "#5f5e5e",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#444748",
+                    "on-surface": "#1c1b1b",
+                    "tertiary": "#000000",
+                    "tertiary-container": "#1c1b1a",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "on-background": "#1c1b1b",
+                    "tertiary-fixed": "#e6e2df",
+                    "on-secondary-fixed-variant": "#584329",
+                    "background": "#fdf8f8",
+                    "outline": "#747878",
+                    "on-primary-container": "#858383",
+                    "placeholder-fill": "#F0F0F0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "element-gap": "8px",
+                    "edge-margin": "24px",
+                    "section-gap": "80px",
+                    "stack-gap": "16px"
+            },
+            "fontFamily": {
+                    "body-main": ["Hanken Grotesk"],
+                    "display-en": ["Hanken Grotesk"],
+                    "headline-ch": ["Hanken Grotesk"],
+                    "label-caps": ["Hanken Grotesk"],
+                    "link-action": ["Hanken Grotesk"],
+                    "display-ch": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-main": ["15px", { "lineHeight": "1.8", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                    "display-en": ["11px", { "lineHeight": "1.2", "letterSpacing": "0.3em", "fontWeight": "300" }],
+                    "headline-ch": ["22px", { "lineHeight": "1.5", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                    "label-caps": ["10px", { "lineHeight": "1", "letterSpacing": "0.2em", "fontWeight": "400" }],
+                    "link-action": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                    "display-ch": ["28px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "300" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        @keyframes dotScroll {
+            0% { top: 0; opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { top: 24px; opacity: 0; }
+        }
+        @keyframes lineFadeIn {
+            from { opacity: 0; transform: scaleY(0); }
+            to { opacity: 1; transform: scaleY(1); }
+        }
+        @keyframes heroTextFadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heroImgFadeIn {
+            from { opacity: 0; transform: scale(1.03); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeSlideLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeSlideRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleFadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes lineExpand {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        @keyframes textReveal {
+            from { opacity: 0; clip-path: inset(0 100% 0 0); }
+            to { opacity: 1; clip-path: inset(0 0 0 0); }
+        }
+        @keyframes subtleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        /* Hero animations */
+        .hero-text-animate {
+            animation: heroTextFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+            opacity: 0;
+        }
+        .hero-img-animate {
+            animation: heroImgFadeIn 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        /* Section reveal animations - different per section */
+        .reveal-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-fade-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-fade-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-line {
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-line.is-visible {
+            transform: scaleX(1);
+        }
+        .reveal-fade-up.is-visible, .reveal-fade-left.is-visible, .reveal-fade-right.is-visible, .reveal-scale.is-visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0) scale(1);
+        }
+        /* Stagger variations */
+        .stagger-fade-up .stagger-item {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stagger-fade-up.is-visible .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-fade-left .stagger-item {
+            opacity: 0;
+            transform: translateX(-25px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stagger-fade-left.is-visible .stagger-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .stagger-scale .stagger-item {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stagger-scale.is-visible .stagger-item {
+            opacity: 1;
+            transform: scale(1);
+        }
+        /* Image reveal with clip */
+        .img-reveal {
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .img-reveal.is-visible {
+            clip-path: inset(0 0 0 0);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Smooth image loading */
+        img {
+            transition: opacity 0.5s ease;
+        }
+        /* Hover effects for interactive elements */
+        .interactive-element {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        }
+        .interactive-element:active {
+            transform: scale(0.97);
+        }
+        /* Hide scrollbar for clean look but keep functionality */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        :root {
+          --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+          --transition-medium: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          --reveal-offset: 100px;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+          .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--transition-slow), transform var(--transition-slow);
+            will-change: opacity, transform;
+          }
+
+          .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          .stagger-container.is-visible .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--transition-medium), transform var(--transition-medium);
+            will-change: opacity, transform;
+          }
+
+          .interactive-element {
+            transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+          }
+
+          .interactive-element:active {
+            transform: scale(0.98);
+          }
+
+          .shimmer {
+            position: relative;
+            overflow: hidden;
+            background: #F0F0F0;
+          }
+
+          .shimmer::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+              90deg,
+              rgba(247, 243, 242, 0) 0%,
+              rgba(255, 255, 255, 0.4) 50%,
+              rgba(247, 243, 242, 0) 100%
+            );
+            background-size: 50% 100%;
+            animation: shimmer 2.5s infinite linear;
+          }
+
+          @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+
+          #nav-drawer {
+            transition: transform var(--transition-medium);
+          }
+        }
+
+        /* Reveal on Scroll Animations */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-container .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stagger-container.is-visible .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-container .stagger-item:nth-child(1) { transition-delay: 0s; }
+        .stagger-container .stagger-item:nth-child(2) { transition-delay: 0.1s; }
+        .stagger-container .stagger-item:nth-child(3) { transition-delay: 0.2s; }
+        .stagger-container .stagger-item:nth-child(4) { transition-delay: 0.3s; }
+        .stagger-container .stagger-item:nth-child(5) { transition-delay: 0.4s; }
+        .stagger-container .stagger-item:nth-child(6) { transition-delay: 0.5s; }
+        .stagger-container .stagger-item:nth-child(7) { transition-delay: 0.6s; }
+        /* Stagger variations */
+        .stagger-fade-up .stagger-item:nth-child(1) { transition-delay: 0s; }
+        .stagger-fade-up .stagger-item:nth-child(2) { transition-delay: 0.12s; }
+        .stagger-fade-up .stagger-item:nth-child(3) { transition-delay: 0.24s; }
+        .stagger-fade-up .stagger-item:nth-child(4) { transition-delay: 0.36s; }
+        .stagger-fade-up .stagger-item:nth-child(5) { transition-delay: 0.48s; }
+        .stagger-fade-up .stagger-item:nth-child(6) { transition-delay: 0.60s; }
+        .stagger-scale .stagger-item:nth-child(1) { transition-delay: 0s; }
+        .stagger-scale .stagger-item:nth-child(2) { transition-delay: 0.08s; }
+        .stagger-scale .stagger-item:nth-child(3) { transition-delay: 0.16s; }
+        .stagger-scale .stagger-item:nth-child(4) { transition-delay: 0.24s; }
+        .stagger-scale .stagger-item:nth-child(5) { transition-delay: 0.32s; }
+        .stagger-scale .stagger-item:nth-child(6) { transition-delay: 0.40s; }
+        .stagger-fade-left .stagger-item:nth-child(1) { transition-delay: 0s; }
+        .stagger-fade-left .stagger-item:nth-child(2) { transition-delay: 0.1s; }
+        .stagger-fade-left .stagger-item:nth-child(3) { transition-delay: 0.2s; }
+        .stagger-fade-left .stagger-item:nth-child(4) { transition-delay: 0.3s; }
+        .stagger-fade-left .stagger-item:nth-child(5) { transition-delay: 0.4s; }
+        .stagger-fade-left .stagger-item:nth-child(6) { transition-delay: 0.5s; }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Optimized Slider Styling */
+        #material-slider-container {
+            user-select: none;
+            touch-action: pan-y;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding-left: 12.5vw;
+            padding-right: 12.5vw;
+        }
+        
+        #material-slider {
+            display: flex;
+            width: max-content;
+        }
+
+        .material-card {
+            scroll-snap-align: center;
+        }
+    </style>
+<!-- Sidebar Navigation Drawer -->
+<div class="fixed inset-0 bg-primary/20 backdrop-blur-sm z-40 transition-opacity duration-300 opacity-0 hidden" id="nav-backdrop"></div>
+<aside class="fixed top-0 left-0 h-full w-64 bg-surface z-50 transform transition-transform duration-300 flex flex-col pt-16 px-edge-margin shadow-2xl -translate-x-full" id="nav-drawer">
+<button class="absolute top-4 right-4 p-2 text-on-surface-variant hover:opacity-70 transition-opacity interactive-element" id="close-menu">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+<nav class="flex flex-col gap-8 mt-8 stagger-container" id="drawer-nav">
+<a class="font-headline-ch text-[18px] text-on-surface tracking-[0.1em] font-light hover:text-primary transition-colors drawer-link interactive-element stagger-item" href="#home" style="transition-delay: 0s;">首页
+<span class="block font-display-en text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70 mt-1">HOME</span></a>
+<a class="font-headline-ch text-[18px] text-on-surface tracking-[0.1em] font-light hover:text-primary transition-colors drawer-link interactive-element stagger-item" href="#laboratory" style="transition-delay: 0.1s;">木作
+<span class="block font-display-en text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70 mt-1">WOODWORKS</span></a>
+<a class="font-headline-ch text-[18px] text-on-surface tracking-[0.1em] font-light hover:text-primary transition-colors drawer-link interactive-element stagger-item" href="#inspiration" style="transition-delay: 0.2s;">臻材
+<span class="block font-display-en text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70 mt-1">ESSENCE</span></a>
+<a class="font-headline-ch text-[18px] text-on-surface tracking-[0.1em] font-light hover:text-primary transition-colors drawer-link interactive-element stagger-item" href="#location" style="transition-delay: 0.3s;">寻迹
+<span class="block font-display-en text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70 mt-1">LOCATION</span></a>
+<a class="font-headline-ch text-[18px] text-on-surface tracking-[0.1em] font-light hover:text-primary transition-colors drawer-link interactive-element stagger-item" href="#booking" style="transition-delay: 0.4s;">结缘
+<span class="block font-display-en text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70 mt-1">BOOKING</span></a>
+</nav>
+<div class="mt-auto pb-8">
+<span class="font-display-en text-[11px] tracking-[0.3em] text-on-surface font-light uppercase">金尚源 | JINSHANGYUAN</span>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="bg-surface text-primary border-b border-warm-gray docked full-width top-0 z-50 fixed left-0 right-0 reveal-fade-up is-visible">
+<div class="flex justify-between items-center w-full px-edge-margin h-16">
+<button aria-label="Menu" class="text-on-surface-variant hover:opacity-70 transition-opacity active:scale-95 duration-150 p-2 -ml-2 interactive-element" id="menu-toggle">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<h1 class="font-display-en text-display-en tracking-[0.3em] font-light text-primary uppercase">
+<div class="flex items-center gap-3"><span class="" style="letter-spacing: 1.1px; text-align: center;">金尚源 | JINSHANGYUAN</span></div>
+</h1>
+</div>
+</header>
+<div class="h-16 w-full"></div>
+<main class="w-full" id="home">
+<!-- Hero Section -->
+<section class="w-full relative reveal-fade-up is-visible -mt-px">
+<div class="w-full relative overflow-hidden"><img src="https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/ccv2%2F2026-05-31%2FMiniMax-M2.7%2F2038809540916417323%2F42a69ac2cbb776821e6159f8eca6ab29847eb522f95434a671421bffa5a2cfcd..jpeg?Expires=1780311204&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=aqf9lG83RwRdxFKzpP8Rdzedp7I%3D" alt="JINSHANGYUAN Hero Image" class="w-full object-cover">
+<div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-start pt-[12vh]">
+<h2 style="font-family: 'Hanken Grotesk', sans-serif; font-size: 0.9rem; letter-spacing: 0.45em; font-weight: 300; color: rgba(255,255,255,0.9); text-shadow: 0 2px 20px rgba(0,0,0,0.35);">隐 匿 于 形 ， 归 境 于 心</h2>
+<p class="mt-4" style="font-family: 'Hanken Grotesk', sans-serif; font-size: 9px; letter-spacing: 0.2em; font-weight: 300; color: rgba(255,255,255,0.65);">源自广东的高定精工</p>
+</div>
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center" style="animation: lineFadeIn 1.5s ease-out forwards;">
+<span style="display: block; width: 1px; height: 28px; background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%); position: relative; overflow: hidden; margin-bottom: 8px;">
+<span style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 3px; height: 3px; background: rgba(255,255,255,0.9); border-radius: 50%; animation: dotScroll 2.2s ease-in-out infinite;"></span>
+</span>
+<span style="font-family: 'Hanken Grotesk', sans-serif; font-size: 8px; letter-spacing: 0.25em; color: rgba(255,255,255,0.5); font-weight: 300;">SCROLL</span>
+</div>
+</div>
+<div class="pt-6 pb-section-gap px-6">
+<h2 class="font-headline-ch text-on-surface mb-stack-gap italic text-justify" style="font-family: &quot;Hanken Grotesk&quot;, sans-serif; font-size: 1.25rem; line-height: 1.75; letter-spacing: 0.05em; text-align: justify; font-weight: 300; color: rgb(28, 27, 27); word-break: keep-all; overflow-wrap: break-word;">
+<p class="">金尚源，</p><div class="">始于广东深耕中原的高定木作力量。</div>
+<p class=""></p>
+<p class="">以极简语境与严苛标准，</p>
+<p class="">让原木肌理自然流淌于现代空间，</p>
+<p class="">为您构筑传世级别的艺术生活场域。</p>
+</h2>
+<p class="font-body-main text-body-main text-on-surface-variant text-left">
+<span class="" style="color: rgb(116, 120, 120); font-family: &quot;Hanken Grotesk&quot;, sans-serif; font-size: 11px; letter-spacing: 0.15em; font-weight: 300; background-color: transparent;">10,000㎡ 生产基地 | 100% 源头直发 | 0 溢价高定</span>
+</p>
+<p class="text-left mt-4" style="font-family: 'Hanken Grotesk', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: rgb(116, 120, 120); font-weight: 300;">只为极致空间</p>
+</div>
+</section>
+<!-- Materials Library Section -->
+<section class="w-full px-edge-margin pb-section-gap reveal-fade-left is-visible" id="laboratory">
+<p class="font-display-en text-display-en text-on-surface-variant uppercase mb-element-gap">Communication</p>
+<div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar -mx-edge-margin gap-stack-gap horizontal-slider px-edge-margin stagger-scale is-visible">
+<!-- Slide 1 -->
+<div class="snap-center shrink-0 w-[85vw] flex flex-col group stagger-item" style="transition-delay: 0s;">
+<div class="relative aspect-[4/3] mb-stack-gap overflow-hidden"><img src="./图片/3分类/1.jpg" alt="门与墙的建筑化" class="w-full h-full object-cover"></div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-ch text-headline-ch text-on-surface">门与墙的建筑化</h3>
+<p class="font-body-main text-body-main text-on-surface-variant">室内木门、隐形门系统、高定护墙板。隐匿于墙，开合有度，赋予空间沉稳的建筑肌理。</p>
+</div>
+<div class="w-full h-px bg-warm-gray mt-stack-gap"></div>
+</div>
+<!-- Slide 2 -->
+<div class="snap-center shrink-0 w-[85vw] flex flex-col group stagger-item" style="transition-delay: 0.1s;">
+<div class="relative aspect-[4/3] mb-stack-gap overflow-hidden"><img src="./图片/3分类/2.png" alt="空间秩序的重构" class="w-full h-full object-cover"></div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-ch text-headline-ch text-on-surface">空间秩序的重构</h3>
+<p class="font-body-main text-body-main text-on-surface-variant">整体衣柜、奢适酒柜、整体橱柜。融合新中式、极简意式及法式风格。</p>
+</div>
+<div class="w-full h-px bg-warm-gray mt-stack-gap"></div>
+</div>
+<!-- Slide 3 -->
+<div class="snap-center shrink-0 w-[85vw] flex flex-col group stagger-item" style="transition-delay: 0.2s;">
+<div class="relative aspect-[4/3] mb-stack-gap overflow-hidden"><img src="./图片/3分类/3.png" alt="私属衣帽间" class="w-full h-full object-cover"></div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-ch text-headline-ch text-on-surface">私属衣帽间</h3>
+<p class="font-body-main text-body-main text-on-surface-variant">全案系统衣帽间与精密智能收纳，让秩序感优雅回归私人领域。</p>
+</div>
+<div class="w-full h-px bg-warm-gray mt-stack-gap"></div>
+</div>
+</div>
+</section>
+<!-- Inspirations Section -->
+<section class="w-full px-edge-margin pb-section-gap reveal-fade-right is-visible" id="inspiration">
+<p class="font-display-en text-display-en text-on-surface-variant uppercase mb-element-gap reveal-line">Inspirations</p>
+<h3 class="font-headline-ch text-headline-ch text-on-surface mb-stack-gap">传统与现代的木作美学</h3>
+<img src="https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/ccv2%2F2026-05-31%2FMiniMax-M2.7%2F2038809540916417323%2F6c31bb5d0988c4eb9d18471843034f44ff4ab5ac12225ef3fb8c8463275d8e15..jpeg?Expires=1780311205&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=HkMYmb7kDcyXc3ns9bk82rw%2BTnA%3D" alt="Bespoke Woodwork Inspiration" class="w-full aspect-[16/9] object-cover img-reveal is-visible" style="object-position: center center;">
+<h4 class="font-headline-ch text-headline-ch text-on-surface mt-6 mb-stack-gap">雅致空间，高定木作</h4>
+<p class="font-body-main text-body-main text-on-surface-variant">
+                极简的隐形门将空间感无限延伸，在温润的实木包裹下，雅致空间以纯粹色调和沉浸式木作重新演绎了居住环境的灵魂。
+            </p>
+</section>
+<!-- Material Gallery Section with Optimized Slider -->
+<section class="w-full py-section-gap bg-surface-container-low reveal-scale overflow-x-hidden" id="materials">
+<div class="px-edge-margin mb-12 flex justify-between items-end mx-auto">
+<div class="space-y-2">
+<h3 class="font-headline-ch text-[28px] text-on-surface leading-tight reveal-fade-up">2026 材质大观</h3>
+<p class="font-body-main text-[11px] text-on-surface tracking-[0.2em] uppercase font-light reveal-fade-up">新品预告 2026</p>
+<p class="font-display-en text-[11px] text-on-surface-variant tracking-[0.15em] reveal-fade-up" id="slide-counter">1 / 6</p>
+</div>
+<div class="flex gap-4 pb-1 reveal-fade-up">
+<button class="text-on-surface hover:opacity-50 transition-opacity interactive-element w-8 h-8 flex items-center justify-center border border-on-surface/10 rounded-full" id="slider-prev"><span class="material-symbols-outlined text-[20px] font-light">west</span></button>
+<button class="text-on-surface hover:opacity-50 transition-opacity interactive-element w-8 h-8 flex items-center justify-center border border-on-surface/10 rounded-full" id="slider-next"><span class="material-symbols-outlined text-[20px] font-light">east</span></button>
+</div>
+</div>
+<div class="relative w-full hide-scrollbar" id="material-slider-container">
+<div class="flex gap-6 stagger-scale is-visible" id="material-slider">
+<!-- North American FAS Hardwood -->
+<div class="material-card shrink-0 w-[75vw] flex flex-col stagger-item" style="transition-delay: 0s;">
+<div class="mb-6 aspect-[4/3]"><img src="https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/ccv2%2F2026-06-01%2FMiniMax-M2.7%2F2038809540916417323%2F39a810a6f12f84540c9f1d5a8312d16008f1ea2ee7abbb17b76c1a17e18127d8..jpeg?Expires=1780370908&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=CxIRKf04%2Fxn9XIcela91KG4QRQA%3D" class="w-full h-full object-cover"></div>
+<div class="space-y-2 px-1">
+<h4 class="font-headline-ch text-[18px] text-on-surface">北美 FAS 级原木</h4>
+<p class="font-body-main text-[13px] text-on-surface-variant font-light">甄选顶级原木，纹理如画。</p>
+</div>
+</div>
+<!-- Italian TABU / ALPI Veneer -->
+<div class="material-card shrink-0 w-[75vw] flex flex-col stagger-item" style="transition-delay: 0.1s;">
+<div class="mb-6 aspect-[4/3]"><img src="./图片/6材质/2.jpg" class="w-full h-full object-cover"></div>
+<div class="space-y-2 px-1">
+<h4 class="font-headline-ch text-[18px] text-on-surface">意大利 TABU / ALPI 木皮</h4>
+<p class="font-body-main text-[13px] text-on-surface-variant font-light">国际高定木皮，自然肌理。</p>
+</div>
+</div>
+<!-- Sherwin-Williams Paint -->
+<div class="material-card shrink-0 w-[75vw] flex flex-col stagger-item" style="transition-delay: 0.2s;">
+<div class="mb-6 aspect-[4/3]"><img src="./图片/6材质/3.jpg" class="w-full h-full object-cover"></div>
+<div class="space-y-2 px-1">
+<h4 class="font-headline-ch text-[18px] text-on-surface">美国宣伟漆</h4>
+<p class="font-body-main text-[13px] text-on-surface-variant font-light">顶级环保涂料，温润肤感。</p>
+</div>
+</div>
+<!-- German Hettich / Austrian Blum Hardware -->
+<div class="material-card shrink-0 w-[75vw] flex flex-col stagger-item" style="transition-delay: 0.3s;">
+<div class="mb-6 aspect-[4/3]"><img src="./图片/6材质/4.jpg" class="w-full h-full object-cover"></div>
+<div class="space-y-2 px-1">
+<h4 class="font-headline-ch text-[18px] text-on-surface">德国海蒂诗 / 奥地利百隆</h4>
+<p class="font-body-main text-[13px] text-on-surface-variant font-light">全球顶级五金，静音开合。</p>
+</div>
+</div>
+<!-- Italian BAXTER Leather -->
+<div class="material-card shrink-0 w-[75vw] flex flex-col stagger-item" style="transition-delay: 0.4s;">
+<div class="mb-6 aspect-[4/3]"><img src="./图片/6材质/5.jpg" class="w-full h-full object-cover"></div>
+<div class="space-y-2 px-1">
+<h4 class="font-headline-ch text-[18px] text-on-surface">意大利 BAXTER 顶级皮革</h4>
+<p class="font-body-main text-[13px] text-on-surface-variant font-light">顶奢同源皮革，触感温润。</p>
+</div>
+</div>
+<!-- Italian LODES Lighting -->
+<div class="material-card shrink-0 w-[75vw] flex flex-col stagger-item" style="transition-delay: 0.5s;">
+<div class="mb-6 aspect-[4/3]"><img src="./图片/6材质/6.jpg" class="w-full h-full object-cover"></div>
+<div class="space-y-2 px-1">
+<h4 class="font-headline-ch text-[18px] text-on-surface">意大利 LODES 艺术灯光</h4>
+<p class="font-body-main text-[13px] text-on-surface-variant font-light">艺术光影系统，静谧之美。</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Grid -->
+<section class="w-full px-edge-margin py-section-gap reveal-fade-up">
+<div class="flex justify-between items-center mb-stack-gap">
+<p class="font-display-en text-display-en text-on-surface uppercase tracking-[0.2em]">@artisanwoodwork</p>
+<span class="material-symbols-outlined text-xl">photo_camera</span>
+</div>
+<div class="grid grid-cols-2 gap-element-gap stagger-fade-up">
+<div class="col-span-2 aspect-[4/5] relative stagger-item interactive-element" style="transition-delay: 0s;"><img src="./图片/7图摄影/1.png" class="w-full h-full object-cover"></div>
+<div class="col-span-1 relative aspect-[3/4] stagger-item interactive-element" style="transition-delay: 0.1s;"><img src="./图片/7图摄影/2.png" class="w-full h-full object-cover"></div>
+<div class="col-span-1 relative aspect-[3/4] stagger-item interactive-element" style="transition-delay: 0.2s;"><img src="./图片/7图摄影/3.png" class="w-full h-full object-cover"></div>
+<div class="col-span-1 relative aspect-[3/4] stagger-item interactive-element" style="transition-delay: 0.3s;"><img src="./图片/7图摄影/4.jpg" class="w-full h-full object-cover"></div>
+<div class="col-span-1 relative aspect-[3/4] stagger-item interactive-element" style="transition-delay: 0.4s;"><img src="https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/ccv2%2F2026-06-01%2FMiniMax-M2.7%2F2038809540916417323%2F9fc8fbc778272c77a8447265fbedb85f1eea39950f260e6fce0638e3cc6fad1c..jpeg?Expires=1780372038&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=nYuHTGpHCvWJ%2Fft9m6d1Zh2r3Bw%3D" class="w-full h-full object-cover"></div>
+<div class="col-span-1 relative aspect-[3/4] stagger-item interactive-element" style="transition-delay: 0.5s;"><img src="./图片/7图摄影/6.png" class="w-full h-full object-cover"></div>
+<div class="col-span-1 relative aspect-[3/4] stagger-item interactive-element" style="transition-delay: 0.6s;"><img src="./图片/7图摄影/7.jpg" class="w-full h-full object-cover" style="object-position: center bottom;"></div>
+</div>
+</section>
+<!-- Newsletter Subscription -->
+<section class="w-full bg-surface-container-low px-edge-margin py-section-gap reveal-fade-left overflow-x-hidden" id="booking">
+<h3 class="font-headline-ch text-headline-ch text-on-surface mb-stack-gap">开启高定之旅</h3>
+<form class="flex flex-col gap-stack-gap" id="booking-form" novalidate>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">NAME *</label>
+<input class="w-full border-0 border-b border-primary bg-transparent px-0 py-2 focus:ring-0 focus:border-primary text-body-main placeholder:text-outline transition-colors" placeholder="您的姓名" type="text" id="name-input">
+<span class="text-[10px] text-error mt-1 hidden" id="name-error">请填写您的姓名</span>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">PHONE *</label>
+<input class="w-full border-0 border-b border-primary bg-transparent px-0 py-2 focus:ring-0 focus:border-primary text-body-main placeholder:text-outline transition-colors" placeholder="您的手机号" type="tel" id="phone-input">
+<span class="text-[10px] text-error mt-1 hidden" id="phone-error">请填写您的手机号</span>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-caps text-label-caps py-4 mt-stack-gap hover:opacity-90 transition-opacity uppercase tracking-[0.2em] interactive-element" type="submit">提交预约</button>
+</form>
+<div id="booking-success" class="hidden">
+<div class="flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-[32px] text-on-surface-variant mb-4" style="font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 24;">task_alt</span>
+<p class="font-headline-ch text-[16px] text-on-surface tracking-[0.05em] mb-2">预约已收到</p>
+<p class="font-body-main text-[11px] text-on-surface-variant tracking-[0.1em]">若期许尽早对接，欢迎直接致电或添加微信</p>
+<p class="font-body-main text-[11px] text-on-surface-variant tracking-[0.1em] mt-1">Tel & WeChat：138 - 6000 - 2200</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface text-on-surface border-t border-warm-gray full-width flex flex-col w-full pb-10 reveal-fade-up" id="location">
+<div class="space-y-section-gap pt-10 px-edge-margin">
+<!-- SHOWROOM -->
+<div class="">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.2em] mb-4">SHOWROOM</p>
+<hr class="border-warm-gray mb-8">
+<div class="font-headline-ch text-[16px] text-on-surface space-y-2">
+<p class="">郑州市 服务中心</p>
+<p class="">五栋大楼 c 座 1309</p>
+</div>
+</div>
+<!-- WORKSHOP -->
+<div class="">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.2em] mb-4">WORKSHOP</p>
+<hr class="border-warm-gray mb-8">
+<div class="font-headline-ch text-[16px] text-on-surface space-y-2">
+<p class="">郑州市 航空港区</p>
+<p class="">金尚源 智能智造基地</p>
+</div>
+</div>
+<!-- CONTACT -->
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.2em] mb-4">CONTACT</p>
+<hr class="border-warm-gray mb-8">
+<div class="space-y-4">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.2em]">RESERVATION LINE</p>
+<p class="font-display-ch text-[24px] tracking-widest text-on-surface">138 - 6000 - 2200</p>
+<p class="font-body-main text-[11px] text-on-surface-variant tracking-[0.1em]">电话及微信号码一致</p>
+</div>
+</div>
+<!-- FOOTER BOTTOM -->
+<div class="flex flex-col pb-10 items-start pt-4">
+<p class="font-display-en text-[11px] text-on-surface-variant tracking-[0.15em] mb-2">金尚源 | JINSHANGYUAN</p>
+<p class="font-label-caps text-[9px] text-on-surface-variant/60 uppercase tracking-[0.1em]">© 2026 金尚源 JINSHANGYUAN. ALL RIGHTS RESERVED.</p>
+</div>
+</div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- LOADING SCREEN ---
+        const loadingScreen = document.getElementById('loading-screen');
+        const loadingTitle = document.getElementById('loading-title');
+        const loadingSubtitle = document.getElementById('loading-subtitle');
+        const loadingBar = document.getElementById('loading-bar');
+        const loadingLogo = document.getElementById('loading-logo');
+
+        setTimeout(() => {
+            loadingLogo.style.opacity = '1';
+            loadingLogo.style.transform = 'translateY(0)';
+            loadingTitle.style.opacity = '1';
+            loadingTitle.style.transform = 'translateY(0)';
+            loadingSubtitle.style.opacity = '1';
+            loadingBar.style.width = '100%';
+        }, 100);
+
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 800);
+        }, 2200);
+
+        // --- MOBILE MENU DRAWER ---
+        const menuBtn = document.getElementById('menu-toggle');
+        const closeBtn = document.getElementById('close-menu');
+        const drawer = document.getElementById('nav-drawer');
+        const backdrop = document.getElementById('nav-backdrop');
+        const drawerLinks = document.querySelectorAll('.drawer-link');
+        const drawerNav = document.getElementById('drawer-nav');
+
+        function openMenu() {
+            backdrop.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.add('opacity-100');
+                backdrop.classList.remove('opacity-0');
+                drawer.classList.remove('-translate-x-full');
+                drawerNav.classList.add('is-visible');
+                // Trigger stagger on open
+                const items = drawerNav.querySelectorAll('.stagger-item');
+                items.forEach((item, index) => {
+                  item.style.transitionDelay = `${index * 0.1}s`;
+                });
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            backdrop.classList.remove('opacity-100');
+            backdrop.classList.add('opacity-0');
+            drawer.classList.add('-translate-x-full');
+            drawerNav.classList.remove('is-visible');
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        backdrop.addEventListener('click', closeMenu);
+        drawerLinks.forEach(link => link.addEventListener('click', closeMenu));
+        
+        // --- REVEAL ON SCROLL ---
+        const revealOptions = {
+          threshold: 0.15,
+          rootMargin: '0px 0px -30px 0px'
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            }
+          });
+        }, revealOptions);
+
+        document.querySelectorAll('.reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale, .reveal-line, .stagger-fade-up, .stagger-fade-left, .stagger-scale, .img-reveal, .stagger-container').forEach(el => {
+          revealObserver.observe(el);
+        });
+
+        // --- SMOOTH SCROLL FOR NAV LINKS ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+
+        // --- SLIDER LOGIC ---
+        const sliderContainer = document.getElementById('material-slider-container');
+        const nextBtn = document.getElementById('slider-next');
+        const prevBtn = document.getElementById('slider-prev');
+        const slideCounter = document.getElementById('slide-counter');
+        const cards = Array.from(sliderContainer.querySelectorAll('.material-card'));
+        const totalCards = cards.length;
+        let currentIndex = 0;
+
+        function updateCounter() {
+            slideCounter.textContent = `${currentIndex + 1} / ${totalCards}`;
+        }
+
+        function findClosestCard() {
+            const containerWidth = sliderContainer.offsetWidth;
+            const centerOffset = containerWidth / 2;
+            const scrollCenter = sliderContainer.scrollLeft + centerOffset;
+            let closestIndex = 0;
+            let minDistance = Infinity;
+
+            for (let i = 0; i < totalCards; i++) {
+                const cardCenter = cards[i].offsetLeft + cards[i].offsetWidth / 2;
+                const distance = Math.abs(cardCenter - scrollCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = i;
+                }
+            }
+            return closestIndex;
+        }
+
+        function scrollToCard(index) {
+            const card = cards[index];
+            const containerWidth = sliderContainer.offsetWidth;
+            const cardWidth = card.offsetWidth;
+            const targetScroll = card.offsetLeft - (containerWidth - cardWidth) / 2;
+            sliderContainer.scrollTo({ left: targetScroll, behavior: 'smooth' });
+            currentIndex = index;
+            updateCounter();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            let nextIndex = currentIndex + 1;
+            if (nextIndex >= totalCards) {
+                nextIndex = 0;
+            }
+            scrollToCard(nextIndex);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            let prevIndex = currentIndex - 1;
+            if (prevIndex < 0) {
+                prevIndex = totalCards - 1;
+            }
+            scrollToCard(prevIndex);
+        });
+
+        sliderContainer.addEventListener('scroll', () => {
+            const newIndex = findClosestCard();
+            if (newIndex !== currentIndex) {
+                currentIndex = newIndex;
+                updateCounter();
+            }
+        });
+
+        let startX = 0;
+
+        sliderContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX;
+        }, { passive: true });
+
+        sliderContainer.addEventListener('touchend', (e) => {
+            const deltaX = e.changedTouches[0].pageX - startX;
+            const threshold = 50;
+
+            if (Math.abs(deltaX) > threshold) {
+                if (deltaX < 0) {
+                    nextBtn.click();
+                } else {
+                    prevBtn.click();
+                }
+            } else {
+                currentIndex = findClosestCard();
+                scrollToCard(currentIndex);
+            }
+        });
+
+        window.addEventListener('load', () => {
+            scrollToCard(0);
+        });
+
+        // --- BOOKING FORM ---
+        const bookingForm = document.getElementById('booking-form');
+        const bookingSuccess = document.getElementById('booking-success');
+        const nameInput = document.getElementById('name-input');
+        const phoneInput = document.getElementById('phone-input');
+        const nameError = document.getElementById('name-error');
+        const phoneError = document.getElementById('phone-error');
+
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let valid = true;
+
+                if (!nameInput.value.trim()) {
+                    nameError.classList.remove('hidden');
+                    nameInput.style.borderColor = '#ba1a1a';
+                    valid = false;
+                } else {
+                    nameError.classList.add('hidden');
+                    nameInput.style.borderColor = '';
+                }
+
+                if (!phoneInput.value.trim()) {
+                    phoneError.classList.remove('hidden');
+                    phoneInput.style.borderColor = '#ba1a1a';
+                    valid = false;
+                } else {
+                    phoneError.classList.add('hidden');
+                    phoneInput.style.borderColor = '';
+                }
+
+                if (valid) {
+                    bookingForm.classList.add('hidden');
+                    bookingSuccess.classList.remove('hidden');
+                }
+            });
+
+            nameInput.addEventListener('input', () => {
+                nameError.classList.add('hidden');
+                nameInput.style.borderColor = '';
+            });
+
+            phoneInput.addEventListener('input', () => {
+                phoneError.classList.add('hidden');
+                phoneInput.style.borderColor = '';
+            });
+        }
+    });
+</script>
+```
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
